@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: CC0-1.0
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 interface IERC4907 {
     // Logged when the user of a token assigns a new user or updates expires
@@ -38,7 +38,7 @@ contract ERC4907 is ERC721, IERC4907 {
 
     mapping (uint256  => UserInfo) internal _users;
 
-    constructor(string memory name_, string memory symbol_)
+    constructor(string memory name_, string memory symbol_) public
     ERC721(name_,symbol_)
     {
     }
@@ -61,7 +61,7 @@ contract ERC4907 is ERC721, IERC4907 {
     /// @param tokenId The NFT to get the user address for
     /// @return The user address for this NFT
     function userOf(uint256 tokenId)public view virtual override returns(address){
-        if( uint256(_users[tokenId].expires) >=  block.timestamp){
+        if(uint256(_users[tokenId].expires) >= block.timestamp){
             return  _users[tokenId].user;
         }
         else{
