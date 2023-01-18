@@ -38,8 +38,8 @@ contract ERC4907 is ERC721, IERC4907 {
 
     mapping (uint256  => UserInfo) internal _users;
 
-    constructor(string memory name_, string memory symbol_) public
-    ERC721(name_,symbol_)
+    constructor()
+    ERC721("MyNFT","MFT")
     {
     }
 
