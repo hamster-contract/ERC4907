@@ -43,6 +43,10 @@ contract ERC4907 is ERC721, IERC4907 {
     {
     }
 
+    function safeMint(address to, uint256 amount) public virtual {
+        _safeMint(to, amount);
+    }
+
     /// @notice set the user and expires of a NFT
     /// @dev The zero address indicates there is no user
     /// Throws if `tokenId` is not valid NFT
