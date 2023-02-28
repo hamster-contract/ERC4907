@@ -28,7 +28,12 @@ contract("ERC4907", (accounts) => {
         try {
             await erc4907.setUser(tokenId, user, expires, { from: accounts[1] });
         } catch (error) {
-            assert.equal(error.toString(), "Error: VM Exception while processing transaction: revert ERC721: transfer caller is not owner nor approved");
+            if (error.reason) {
+                assert.equal(error.reason, "ERC721: transfer caller is not owner nor approved", "Error: VM Exception while processing transaction: revert ERC721: transfer caller is not owner nor approved");
+            } else {
+                assert.equal(error.toString(), "ERC721: transfer caller is not owner nor approved", "Error: VM Exception while processing transaction: revert ERC721: transfer caller is not owner nor approved");
+            }
+
         }
     });
 });
